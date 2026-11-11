@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Verification harnesses for agentic formal verification. Explore why API usage contracts determine the scope of a proof.">
+  <title>Pre-QED: Environment Specifications for Agentic Verification</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <a class="brand" href="#overview">Pre-QED</a>
+      <nav aria-label="Main navigation">
+        <a href="#overview">Overview</a><a href="#example">Example</a><a href="#method">Method</a>
+      </nav>
+    </header>
+    <main class="blog-article">
+      <section class="hero" id="overview">
+        <div class="hero-copy">
+        <h1>Pre-QED: Environment Specifications for Agentic Verification</h1>
+        <p class="lead">The bottleneck is shifting from how to prove to what to prove.</p>
+        <div class="byline"><p>Tristan Lim · <a href="https://haoxintu.github.io/">Haoxin Tu</a> · <a href="https://mzfr.me">Mehtab Zafar</a> · <a href="https://fouzhe.github.io/">Zhengxiong Luo</a> · <a href="https://abhikrc.com/">Abhik Roychoudhury</a></p><p class="affiliation">National University of Singapore</p></div>
+        <div class="hero-actions">
+          <a class="button primary" href="https://github.com/NUS-Program-Verification/preqed-challenge" target="_blank" rel="noopener">Download the challenges</a>
+          <button class="button" type="button" aria-expanded="false" aria-controls="bibtex" onclick="const b=document.getElementById('bibtex');b.hidden=!b.hidden;this.setAttribute('aria-expanded',String(!b.hidden))">BibTeX</button>
+        </div>
+        <pre class="bibtex" id="bibtex" hidden>@misc{lim2026preqed,
+  title  = {Pre-QED: Environment Specifications for Agentic Verification},
+  author = {Lim, Tristan and Tu, Haoxin and Zafar, Mehtab and Luo, Zhengxiong and Roychoudhury, Abhik},
+  year   = {2026},
+  url    = {https://pre-qed.github.io/pre-qed.pdf}
+}</pre>
+        </div>
+        <a class="paper-preview" href="pre-qed.pdf" target="_blank" rel="noopener" aria-label="Read the paper PDF (opens in a new tab)">
+          <img src="paper-preview.png" alt="First page of Pre-QED: Environment Specifications for Agentic Verification">
+          <span>Read the paper ↗</span>
+        </a>
+      </section>
+      <div class="stats" role="group" aria-label="Results at a glance">
+        <div class="stat compare">
+          <div class="versus pair"><div><strong>29<sup>†</sup></strong><small>Verification<br>harnesses</small></div><div><strong>234</strong><small>LTL<br>properties</small></div></div>
+        </div>
+        <div class="stat compare">
+          <div class="versus"><div><strong>89.3%</strong><small>Verification</small></div><b class="vs">vs</b><div class="fuzz"><strong>22.1%</strong><small>Fuzz harness</small></div></div>
+          <span>average API coverage</span>
+        </div>
+        <div class="stat compare">
+          <div class="versus"><div><strong>11<sup>*</sup></strong><small>Verification</small></div><b class="vs">vs</b><div class="fuzz"><strong>2</strong><small>Fuzz harness</small></div></div>
+          <span>libraries reach 100% API coverage</span>
+        </div>
+      </div>
+      <p class="stats-note">* Counts only libraries whose harness calls every public API directly<br>† Two of these have very large public APIs that are only partly covered, and one is an application rather than a library</p>
+      <video class="paper-video" src="Pre-QED.mp4" poster="video-poster.jpg" controls preload="metadata" playsinline></video>
+      <section class="context">
+        <h2>Agentic proofs are becoming practical</h2>
+        <p class="body-copy">LLM agents are making formal verification practical at scale. We showed this was possible with <a href="https://dl.acm.org/doi/10.1145/3808164" target="_blank" rel="noopener">AutoRocq</a>, the first agent to verify software systems by collaborating autonomously with the Rocq theorem prover. Unlike earlier approaches that depend on extensive training on proof examples, AutoRocq learns on the fly. It queries the prover for relevant context before choosing a proof step, reasons over the structure of the proof tree, and uses the prover’s feedback to refine the proof iteratively. The result is a proof derivation checked by Rocq, so its correctness never rests on the agent alone. As AI-generated code becomes widespread, this points towards coding agents that generate and validate in a single loop, moving closer to trusted automatic programming.</p>
+        <p class="body-copy">However, formal verification at scale is only meaningful if deep formal specifications capturing functionality are available for checking. Recent efforts bypass this issue by reusing specifications devised for other purposes. <a href="https://www.anthropic.com/research/formal-verification" target="_blank" rel="noopener">OSS-Verify</a> from Anthropic and Theorem, for example, starts with the fuzz harnesses that projects already maintain. It compiles each harness and its library into a sanitized RISC-V binary, then generates a theorem stating that the program terminates normally for every input smaller than 64 MB under the modeled Linux environment. An agent constructs the proof, and the Rocq kernel checks it. But a fuzz harness follows a single sequence of API calls under a single calling context, so the resulting proof covers one usage scenario rather than the library. A correct proof can therefore still establish a narrower guarantee than users expect.</p>
+        <p class="body-copy">We argue that the bottleneck of agentic verification has shifted from how to prove to what to prove. Before zooming into verification at scale, we need deep environment specifications to prove, which is why we call our effort Pre-QED. We propose verification harnesses, executable harnesses that model all legal usages of an API, so that a proof about the harness is a proof about every well-behaved client. Because these harnesses remain executable, their value is not limited to proofs. A fuzzer can drive the same harness through many legal call sequences and calling contexts, enabling more extensive fuzzing than a conventional harness that fixes a single scenario.</p>
+      </section>
+      <section id="example">
+        <h2>A verified harness is not a verified library</h2>
+        <p class="body-copy">A proof covers the behavior represented by its target. If a harness always opens a handle, reads once, and closes it, varying the input cannot introduce a second read. It may also fix the request size and the state at each call. Legal sequences and calling contexts absent from the harness remain outside the theorem.</p>
+        <iframe class="proof-animation" src="proof_scope_animation.html" title="Animated illustration of proof scope across legal API call sequences" loading="lazy" sandbox="allow-scripts"></iframe>
+        <p class="body-copy">The animation starts with one proven path that opens a handle, reads once, and closes it. Other legal uses then appear, including repeated reads and closing and reopening a handle. The original proof does not automatically cover these paths. The blue rectangle groups them into a broader verification target; it does not mean they have been proved safe.</p>
+        <p class="body-copy">We carry this idea into a concrete example in our paper. A faulty read operation limits a request to the source buffer’s total capacity rather than the bytes remaining. The fixed harness reads once from position zero and stays within bounds. A legal client that reads 40 bytes twice from a 64-byte source instead reads 16 bytes past its end.</p>
+      </section>
+      <section id="method">
+        <h2>From fuzz harnesses to verification harnesses</h2>
+        <p class="body-copy">The gap has two parts: which API call sequences the harness admits, and which arguments and accumulated states those calls can use. We propose verification harnesses that decode input bytes into operation sequences, aiming to cover every legal usage under an explicit API contract.</p>
+        <p class="body-copy">The harness must admit valid sequences and contexts while excluding client misuse. Reads require a live handle, closed handles must not be reused, and request lengths must fit the destination buffer. Inputs that the contract leaves unconstrained should remain unconstrained: validating them is the library’s responsibility.</p>
+        <h2 class="subsection-heading">An agentic workflow guided by the API contract</h2>
+        <p class="body-copy">A main agent studies the code and documentation, separating call-order rules from data preconditions. A harness subagent generates executable code and refines it using coverage feedback. An LTL subagent expresses the ordering rules in Linear-time Temporal Logic, using spot checks and an LLM-as-judge assessment to refine the formulas.</p>
+        <p class="body-copy">Synthesis reconciles the harness and temporal properties, with guards and state updates tied to the rules they enforce. Data preconditions are enforced by the harness rather than expressed in LTL. The result uses the existing entry-point proof pipeline while admitting sequences such as repeated reads that expose the example’s defect.</p>
+        <div class="workflow" aria-label="Code and documentation inform a usage contract. Harness generation and LTL ordering rules are reconciled into a verification harness.">
+          <div class="node">Code +<br>documentation</div><span class="arrow">→</span><div class="node">Usage<br>contract</div><span class="arrow">→</span><div class="parallel"><div class="node">Harness + coverage</div><div class="node">LTL + validation</div></div><span class="arrow">→</span><div class="node primary">Verification<br>harness</div>
+        </div>
+      </section>
+      <section id="challenges">
+        <h2>Open challenges: proving verification harnesses</h2>
+        <p class="body-copy">Constructing a harness is not the same as proving it. We release verification harnesses as open challenges: proving them requires reasoning across operation sequences and persistent library state. Three capabilities are central.</p>
+        <p class="body-copy"><strong>Discovering invariants over persistent state.</strong> The prover needs an invariant describing states reachable through legal calls, such as a cursor remaining within the source capacity. Real libraries add heap structures, buffer ownership, and internal state machines. These facts must ultimately be established for the compiled binary.</p>
+        <p class="body-copy"><strong>Proving and composing API-level lemmas.</strong> Rather than analyze every sequence separately, prove that each operation terminates without error and preserves the invariant when its preconditions hold. Reusing these lemmas across calls makes reasoning about arbitrary sequences possible.</p>
+        <p class="body-copy"><strong>Proving compliance with the usage protocol.</strong> Relate the harness’s protocol state to the library state: “open” must imply a live, well-formed handle. Prove that every trace satisfies the extracted LTL rules, moving beyond spot checks. Protocols requiring eventual resource release additionally need liveness reasoning.</p>
+        <p class="body-copy">Our vision is to make library verification as routine as fuzzing, with guarantees covering every well-behaved client represented by the contract. The harness and its temporal properties become trust-critical artifacts, reviewed alongside the code. Richer correctness properties, proofs across dependencies, callbacks, global state, and concurrency remain directions for future work.</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

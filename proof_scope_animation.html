@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What the proof covers — Animated Research Figure</title>
+<style>
+:root{color-scheme:light;--ink:#1f2930;--soft:#65747b;--green:#387f5b;--amber:#c27a32;--blue:#466b9b}
+*{box-sizing:border-box}html,body{height:100%;margin:0;background:#f3f4f2;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+main{width:100%;min-height:100%;display:grid;place-items:center;padding:18px}.wrap{width:min(100%,1440px);position:relative}.stage{position:relative;width:100%;aspect-ratio:1400/640;background:#fcfcfa;overflow:hidden;box-shadow:0 18px 62px rgba(39,54,65,.06),0 1px 2px rgba(39,54,65,.05);border:1px solid #e5e8e5}svg{width:100%;height:100%;display:block}svg text{font-family:Inter,Arial,sans-serif;user-select:none}.node-green{fill:#fcfcfa;stroke:#388663;stroke-width:3}.readtext{font-size:14px;font-weight:550;letter-spacing:.65px;fill:#77848a}.endpoint{font-size:16px;font-weight:600;letter-spacing:1.5px;fill:#28363b}.annotation{font-size:15px;font-weight:570;letter-spacing:.1px;fill:#718087}.note-green{fill:var(--green)}.note-amber{fill:var(--amber)}.note-blue{fill:var(--blue)}.status{font-size:15px;font-weight:600;fill:#456e9e}
+.controls{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:14px;padding:0 4px;color:#617078;font-size:12px;letter-spacing:.1px}.actions{display:flex;gap:6px;align-items:center}.actions button{border:1px solid #d6dddc;background:transparent;border-radius:5px;padding:8px 12px;color:#4b5b62;font-size:12px;font-weight:550;cursor:pointer;transition:background .2s,border-color .2s}.actions select{border:1px solid #d6dddc;background:transparent;border-radius:5px;padding:7px;color:#4b5b62;font:inherit}.actions label{margin-left:5px}.actions button:hover{background:#e7ebea;border-color:#b9c9c6}.timeline{width:230px;height:2px;background:#d7dedb;margin-inline:10px;position:relative}.timeline>span{display:block;position:absolute;inset:0 auto 0 0;background:#6c878c;width:0}.step-label{font-variant-numeric:tabular-nums;color:#718089}button:focus-visible{outline:2px solid #52769a;outline-offset:2px}@media(max-width:650px){.actions{flex-wrap:wrap}main{padding:5px}.controls{padding:8px 10px;margin-top:4px;flex-wrap:wrap}.timeline{width:75px}.actions button{padding:7px 9px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main><div class="wrap"><div class="stage">
+<svg xmlns="http://www.w3.org/2000/svg" id="figure" viewBox="100 150 1400 640" role="img" aria-label="Animated diagram of a single proven Open–Read–Close usage path and a larger family of permitted API-call sequences requiring a new proof">
+<defs>
+<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#789ac6" stop-opacity=".11"/><stop offset="1" stop-color="#789ac6" stop-opacity=".027"/></linearGradient>
+<linearGradient id="proofGlow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#519c70" stop-opacity=".14"/><stop offset="1" stop-color="#519c70" stop-opacity=".022"/></linearGradient>
+<filter id="softBlur" x="-20%" y="-100%" width="140%" height="300%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+
+
+<g id="blue-scope" opacity="0">
+<path id="blue-fill" d="M170 250 H1430 V720 H170 Z" fill="url(#sea)" stroke="none" opacity="0" />
+<path id="blue-line" d="M170 250 H1430 V720 H170 Z" fill="none" stroke="#5d83b1" stroke-width="2.3" stroke-linecap="round"/>
+</g>
+<g id="blue-label" opacity="0" transform="translate(-40 -35)"><rect x="912" y="232" width="365" height="42" rx="7" fill="#fcfcfa"/><text x="931" y="260" class="annotation note-blue" font-size="17">BROADER VERIFICATION TARGET</text></g>
+<g id="proof-pending" opacity="0" transform="translate(-40 -35)"><line x1="1258" y1="259" x2="1312" y2="259" stroke="#7997b7" stroke-width="1.5"/><text x="1325" y="264" class="status">Proof required</text></g>
+
+<g id="fan" stroke="#9caeb6" stroke-width="1.25" fill="none" opacity="0">
+<path d="M245 345 C410 358 445 408 670 421 C972 436 1193 376 1370 345"/>
+<path d="M245 345 C418 365 451 450 690 460 C958 461 1193 381 1370 345"/>
+<path d="M245 345 C408 384 466 519 710 523 C989 526 1217 401 1370 345"/>
+<path d="M245 345 C412 385 446 552 688 556 C969 567 1213 411 1370 345"/>
+<path d="M245 345 C416 409 450 619 689 629 C986 637 1241 417 1370 345"/>
+</g>
+
+<g id="green-halo" opacity="0"><path d="M244 326 C520 307 1087 307 1370 326 Q1402 346 1370 363 C1071 380 535 380 244 363 Q211 345 244 326Z" fill="url(#proofGlow)" stroke="#81b29b" stroke-width="1.25" opacity=".80"/></g>
+<path id="main-rail" d="M245 345 C540 345 1068 345 1370 345" stroke="#388763" stroke-width="4" fill="none" stroke-linecap="round"/>
+<g id="main-label" opacity="0"><text x="527" y="301" class="annotation note-green">FIXED HARNESS</text><line x1="548" y1="309" x2="548" y2="320" stroke="#88af9b" stroke-width="1.3"/><text x="846" y="394" class="annotation note-green">Proven for this harness</text></g>
+
+<path id="p1" d="M245 345 C402 358 437 467 644 475 L991 475 C1191 467 1229 358 1370 345" stroke="#778a93" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+<g id="p1dots" opacity="0"><circle cx="666" cy="475" r="7.5" fill="#657982" stroke="#fcfcfa" stroke-width="3"/><circle id="amberdot" cx="969" cy="475" r="8" fill="#ce8a47" stroke="#fcfcfa" stroke-width="3"/><text x="645" y="505" class="readtext">READ</text><text x="948" y="505" class="readtext">READ</text></g>
+<g id="amber-glow" opacity="0"><circle cx="969" cy="475" r="28" fill="#dea45a" opacity=".13" filter="url(#softBlur)"/><circle cx="969" cy="475" r="17" fill="none" stroke="#d7a05c" stroke-width="1.4" opacity=".65"/></g>
+<g id="p1label" opacity="0"><text x="459" y="408" class="annotation">ANOTHER LEGAL USE</text><text x="991" y="430" class="annotation note-amber">Second read</text><path d="M990 438 l-6 17" stroke="#c48d56" stroke-width="1.2" fill="none"/></g>
+
+<path id="p2" d="M245 345 C392 367 437 558 645 564 L1000 564 C1195 553 1233 363 1370 345" stroke="#a2afb5" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+<g id="p2dots" opacity="0"><circle cx="654" cy="564" r="6.7" fill="#899ba3" stroke="#fcfcfa" stroke-width="2.6"/><circle cx="820" cy="564" r="6.7" fill="#899ba3" stroke="#fcfcfa" stroke-width="2.6"/><circle cx="985" cy="564" r="6.7" fill="#899ba3" stroke="#fcfcfa" stroke-width="2.6"/><text x="633" y="594" class="readtext">READ</text><text x="799" y="594" class="readtext">READ</text><text x="964" y="594" class="readtext">READ</text></g>
+
+<path id="p3" d="M245 345 C386 380 429 647 640 663 L988 663 C1213 647 1231 370 1370 345" stroke="#aab6bd" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+<g id="p3dots" opacity="0"><circle cx="650" cy="663" r="6.4" fill="#8b9da6" stroke="#fcfcfa" stroke-width="2.6"/><circle cx="815" cy="663" r="6.4" fill="#8b9da6" stroke="#fcfcfa" stroke-width="2.6"/><circle cx="980" cy="663" r="6.4" fill="#8b9da6" stroke="#fcfcfa" stroke-width="2.6"/><text x="628" y="693" class="readtext">CLOSE</text><text x="794" y="693" class="readtext">OPEN</text><text x="962" y="693" class="readtext">READ</text></g>
+
+<g id="ends" opacity="0"><circle cx="245" cy="345" r="8.5" fill="#28363b" stroke="#fcfcfa" stroke-width="3.5"/><circle cx="1370" cy="345" r="8.5" fill="#28363b" stroke="#fcfcfa" stroke-width="3.5"/><text x="221" y="308" class="endpoint">OPEN</text><text x="1338" y="308" class="endpoint">CLOSE</text></g>
+<g id="main-dot" opacity="0"><circle cx="811" cy="345" r="8.5" class="node-green"/><text x="789" y="313" class="readtext">READ</text></g>
+<g id="tracer" opacity="0"><circle cx="245" cy="345" r="6.5" fill="#68a78b"/></g>
+
+
+
+</svg>
+</div>
+<div class="controls"><div class="actions"><span class="step-label" id="clock">00:00 / 00:24</span><div class="timeline"><span id="bar"></span></div><button id="pause" type="button">Pause</button><label for="speed">Speed</label><select id="speed" aria-label="Playback speed"><option value="1">1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select><button id="replay" type="button">Replay ↺</button></div></div></div></main>
+<script>
+(()=>{
+const DURATION=24000;
+const el=id=>document.getElementById(id);
+const paths=['main-rail','p1','p2','p3','blue-line'];
+const pL={};
+function ease(x){x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
+function prog(t,a,b){return ease((t-a)/(b-a))}
+function alpha(id,n){el(id).setAttribute('opacity',Math.max(0,Math.min(1,n)).toFixed(3))}
+function draw(id,n){const e=el(id),L=pL[id];e.style.strokeDasharray=L;e.style.strokeDashoffset=(L*(1-Math.max(0,Math.min(1,n))));}
+paths.forEach(id=>{pL[id]=el(id).getTotalLength();draw(id,0)});
+let origin=performance.now(),paused=false,at=0,speed=1;
+
+
+function render(ms){const t=Math.max(0,Math.min(DURATION,ms));at=t;
+const one=prog(t,250,2600),oneTag=prog(t,1700,2950),two=prog(t,5300,8100),twoNodes=prog(t,7000,8200),amber=prog(t,7800,9350),three=prog(t,11200,14400),four=prog(t,12400,15800),family=prog(t,13000,16400),scope=prog(t,17300,20400);
+draw('main-rail',one); alpha('ends',prog(t,900,1600));alpha('main-dot',prog(t,1850,2600));alpha('green-halo',prog(t,2300,3200));alpha('main-label',oneTag);
+draw('p1',two);alpha('p1',Math.min(1,two*4));alpha('p1dots',twoNodes);alpha('amber-glow',amber*(1-.12*Math.max(0,(t-11500)/8000)));alpha('p1label',prog(t,8100,9750));
+draw('p2',three);alpha('p2',Math.min(1,three*4));alpha('p2dots',prog(t,13400,15000));
+draw('p3',four);alpha('p3',Math.min(1,four*4));alpha('p3dots',prog(t,15100,16300));alpha('fan',family*.35);
+alpha('blue-scope',Math.min(1,scope*2));draw('blue-line',scope);el('blue-fill').setAttribute('opacity',(scope*.94).toFixed(3));alpha('blue-label',prog(t,19000,20700));alpha('proof-pending',prog(t,19900,21400));
+let tracerId=null,frac=0;if(t<3300&&t>200){tracerId='main-rail';frac=prog(t,400,2700)}else if(t>5600&&t<9050){tracerId='p1';frac=prog(t,5600,8800)}else if(t>11400&&t<14900){tracerId='p2';frac=prog(t,11400,14600)}
+if(tracerId){const p=el(tracerId).getPointAtLength(pL[tracerId]*frac);el('tracer').setAttribute('transform',`translate(${p.x-245} ${p.y-345})`);alpha('tracer',.75*Math.min(1,prog(t,150,600)))}else{alpha('tracer',0)}
+
+el('clock').textContent=`00:${String(Math.floor(t/1000)).padStart(2,'0')} / 00:24`;el('bar').style.width=`${(t/DURATION*100).toFixed(3)}%`;
+}
+function tick(now){if(!paused){at=Math.max(0,Math.min(DURATION,(now-origin)*speed));if(at>=DURATION){paused=true;el('pause').textContent='Play'}}render(at);requestAnimationFrame(tick)}
+el('pause').onclick=()=>{paused=!paused;origin=performance.now()-at/speed;el('pause').textContent=paused?'Play':'Pause'};
+el('replay').onclick=()=>{at=0;origin=performance.now();paused=false;el('pause').textContent='Pause';render(0)};
+el('speed').onchange=()=>{speed=Number(el('speed').value);origin=performance.now()-at/speed;};
+render(0);requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
