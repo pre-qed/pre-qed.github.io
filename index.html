@@ -51,7 +51,7 @@
           <span>libraries reach 100% API coverage</span>
         </div>
       </div>
-      <p class="stats-note">* Counts only libraries whose harness calls every public API directly<br>† Two of these have very large public APIs that are only partly covered, and one is an application rather than a library</p>
+      <p class="stats-note">† We start from the 32 subjects with <a href="https://github.com/theorem-labs/oss-verify-proofs/tree/main#what-is-proved">publicly released proofs</a> in OSS-Verify and build verification harnesses for 29 of them, excluding reac-pw (an application, not a library) and openssl and mbedtls (over 2,000 API functions each, too many to review).<br>* The other 18 fall short of 100% because their uncovered APIs depend on other build configurations, processes, or the filesystem, or daemons and private libraries (e.g., libpcap, leptonica, varnish).</p>
       <video class="paper-video" src="Pre-QED.mp4" poster="video-poster.jpg" controls preload="metadata" playsinline></video>
       <section class="context">
         <h2>Agentic proofs are becoming practical</h2>
